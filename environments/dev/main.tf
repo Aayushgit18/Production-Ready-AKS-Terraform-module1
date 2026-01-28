@@ -42,6 +42,6 @@ module "aks" {
   system_subnet_id   = module.network.system_subnet_id
   user_subnet_id     = module.network.user_subnet_id
   law_id             = module.monitoring.law_id
-  acr_id             = module.acr.id_id
+  acr_id = module.acr.acr_id
   tags               = var.tags
 }
