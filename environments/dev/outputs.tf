@@ -29,7 +29,7 @@ output "aks_oidc_issuer_url" {
 
 output "acr_id" {
   description = "Azure Container Registry ID"
-  value       = module.acr.id_id
+  value       = module.acr.acr_id
 }
 
 output "acr_login_server" {
@@ -64,4 +64,5 @@ output "user_subnet_id" {
   description = "AKS user node subnet ID"
   value       = module.network.user_subnet_id
 }
+
 
