@@ -1,0 +1,9 @@
+variable "aks_name" {}
+variable "location" {}
+variable "rg_name" {}
+variable "system_subnet_id" {}
+variable "user_subnet_id" {}
+variable "log_analytics_id" {}
+variable "user_vm_size" {}
+variable "acr_id" {}
+variable "admin_group_object_id" {}
