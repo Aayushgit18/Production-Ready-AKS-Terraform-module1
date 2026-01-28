@@ -5,7 +5,9 @@ module "rg" {
 }
 
 module "network" {
-  source             = "../../modules/network"
+  source     = "../../modules/network"
+  depends_on = [module.rg]   
+
   vnet_name          = var.vnet_name
   vnet_cidr          = var.vnet_cidr
   location           = var.location
@@ -15,21 +17,27 @@ module "network" {
 }
 
 module "log" {
-  source   = "../../modules/log-analytics"
+  source     = "../../modules/log-analytics"
+  depends_on = [module.rg]  
+
   name     = var.log_name
   location = var.location
   rg_name  = var.rg_name
 }
 
 module "acr" {
-  source   = "../../modules/acr"
+  source     = "../../modules/acr"
+  depends_on = [module.rg]   
+
   name     = var.acr_name
   location = var.location
   rg_name  = var.rg_name
 }
 
 module "aks" {
-  source                = "../../modules/aks"
+  source     = "../../modules/aks"
+  depends_on = [module.network, module.log, module.acr] # ✅ FIX
+
   aks_name              = var.aks_name
   location              = var.location
   rg_name               = var.rg_name
