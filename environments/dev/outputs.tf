@@ -4,7 +4,7 @@
 
 output "aks_cluster_name" {
   description = "AKS cluster name"
-  value       = module.aks.name
+  value = module.aks.cluster_name
 }
 
 output "aks_resource_group" {
@@ -64,5 +64,6 @@ output "user_subnet_id" {
   description = "AKS user node subnet ID"
   value       = module.network.user_subnet_id
 }
+
 
 
