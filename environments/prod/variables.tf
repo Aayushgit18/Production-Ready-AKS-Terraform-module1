@@ -1,0 +1,9 @@
+variable "location" { type = string }
+variable "rg_name" { type = string }
+variable "aks_name" { type = string }
+variable "acr_name" { type = string }
+variable "vnet_name" { type = string }
+variable "vnet_cidr" { type = list(string) }
+variable "system_subnet_cidr" { type = string }
+variable "user_subnet_cidr" { type = string }
+variable "tags" { type = map(string) }
