@@ -2,7 +2,7 @@
 
 output "aks_cluster_name" {
   description = "AKS cluster name"
-  value = module.aks.cluster_name
+  value       = module.aks.cluster_name
 }
 
 output "aks_resource_group" {

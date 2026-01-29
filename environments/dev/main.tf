@@ -10,47 +10,47 @@ module "rg" {
 }
 
 module "network" {
-  source              = "../../modules/network"
-  rg_name             = module.rg.name
-  location            = var.location
-  vnet_name           = var.vnet_name
-  address_space       = var.vnet_cidr
-  system_subnet_cidr  = var.system_subnet_cidr
-  user_subnet_cidr    = var.user_subnet_cidr
-  tags                = var.tags
+  source             = "../../modules/network"
+  rg_name            = module.rg.name
+  location           = var.location
+  vnet_name          = var.vnet_name
+  address_space      = var.vnet_cidr
+  system_subnet_cidr = var.system_subnet_cidr
+  user_subnet_cidr   = var.user_subnet_cidr
+  tags               = var.tags
 }
 
 module "monitoring" {
   source   = "../../modules/monitoring"
-  rg_name = module.rg.name
+  rg_name  = module.rg.name
   location = var.location
 }
 
 module "acr" {
   source   = "../../modules/acr"
-  rg_name = module.rg.name
+  rg_name  = module.rg.name
   location = var.location
   name     = var.acr_name
   tags     = var.tags
 }
 
 module "aks" {
-  source             = "../../modules/aks"
-  rg_name            = module.rg.name
-  location           = var.location
-  name               = var.aks_name
-  system_subnet_id   = module.network.system_subnet_id
-  user_subnet_id     = module.network.user_subnet_id
-  law_id             = module.monitoring.law_id
-  acr_id = module.acr.acr_id
-  tags               = var.tags
+  source           = "../../modules/aks"
+  rg_name          = module.rg.name
+  location         = var.location
+  name             = var.aks_name
+  system_subnet_id = module.network.system_subnet_id
+  user_subnet_id   = module.network.user_subnet_id
+  law_id           = module.monitoring.law_id
+  acr_id           = module.acr.acr_id
+  tags             = var.tags
 }
 
 module "key_vault" {
-  source   = "../../modules/key-vault"
-  name     = var.key_vault_name
-  location = var.location
-  rg_name  = module.rg.name
+  source    = "../../modules/key-vault"
+  name      = var.key_vault_name
+  location  = var.location
+  rg_name   = module.rg.name
   tenant_id = var.tenant_id
-  tags     = var.tags
+  tags      = var.tags
 }
