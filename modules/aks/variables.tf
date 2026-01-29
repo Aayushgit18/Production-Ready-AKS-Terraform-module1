@@ -6,3 +6,4 @@ variable "user_subnet_id" { type = string }
 variable "law_id" { type = string }
 variable "acr_id" { type = string }
 variable "tags" { type = map(string) }
+variable "private_dns_zone_id" { type = string }

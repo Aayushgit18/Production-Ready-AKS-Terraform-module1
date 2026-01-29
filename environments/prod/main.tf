@@ -32,6 +32,8 @@ module "acr" {
   location = var.location
   name     = var.acr_name
   tags     = var.tags
+  subnet_id = module.network.system_subnet_id
+  vnet_id   = module.network.vnet_id
 }
 
 module "aks" {
@@ -44,6 +46,7 @@ module "aks" {
   law_id             = module.monitoring.law_id
   acr_id             = module.acr.acr_id
   tags               = var.tags
+  private_dns_zone_id = module.network.aks_private_dns_zone_id
 }
 
 module "key_vault" {
@@ -53,4 +56,6 @@ module "key_vault" {
   rg_name  = module.rg.name
   tenant_id = var.tenant_id
   tags     = var.tags
+  subnet_id = module.network.system_subnet_id
+  vnet_id = module.network.vnet_id
 }

@@ -36,12 +36,14 @@ resource "azurerm_kubernetes_cluster" "this" {
     only_critical_addons_enabled = true
   }
 
+  private_dns_zone_id = var.private_dns_zone_id
+
   network_profile {
     network_plugin    = "azure"
     network_policy    = "azure"
     load_balancer_sku = "standard"
-    service_cidr      = "10.20.0.0/16"
-    dns_service_ip    = "10.20.0.10"
+    service_cidr      = "172.16.0.0/16"
+    dns_service_ip    = "172.16.0.10"
   }
 }
 
@@ -55,10 +57,14 @@ resource "azurerm_kubernetes_cluster_node_pool" "user" {
   max_count             = 2
   # zones                 = ["1", "2", "3"]
   mode                  = "User"
+  node_labels = {
+    workload = "apps"
+  }
 }
 
 resource "azurerm_role_assignment" "acr_pull" {
   scope                = var.acr_id
   role_definition_name = "AcrPull"
   principal_id         = azurerm_kubernetes_cluster.this.kubelet_identity[0].object_id
+  depends_on = [azurerm_kubernetes_cluster.this]
 }

@@ -19,3 +19,31 @@ resource "azurerm_subnet" "user" {
   virtual_network_name = azurerm_virtual_network.this.name
   address_prefixes     = [var.user_subnet_cidr]
 }
+
+resource "azurerm_network_security_group" "aks" {
+  name                = "${var.vnet_name}-nsg"
+  location            = var.location
+  resource_group_name = var.rg_name
+}
+
+resource "azurerm_subnet_network_security_group_association" "system" {
+  subnet_id                 = azurerm_subnet.system.id
+  network_security_group_id = azurerm_network_security_group.aks.id
+}
+
+resource "azurerm_subnet_network_security_group_association" "user" {
+  subnet_id                 = azurerm_subnet.user.id
+  network_security_group_id = azurerm_network_security_group.aks.id
+}
+
+resource "azurerm_private_dns_zone" "aks" {
+  name                = "privatelink.${var.location}.azmk8s.io"
+  resource_group_name = var.rg_name
+}
+
+resource "azurerm_private_dns_zone_virtual_network_link" "aks" {
+  name                  = "aks-dns-link"
+  resource_group_name   = var.rg_name
+  private_dns_zone_name = azurerm_private_dns_zone.aks.name
+  virtual_network_id    = azurerm_virtual_network.this.id
+}
