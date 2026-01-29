@@ -10,3 +10,5 @@ tags = {
   environment = "dev"
   owner       = "platform"
 }
+key_vault_name = "kv-aks-dev"
+tenant_id      = "<YOUR_TENANT_ID>"

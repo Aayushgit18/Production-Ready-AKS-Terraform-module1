@@ -7,3 +7,5 @@ variable "vnet_cidr" { type = list(string) }
 variable "system_subnet_cidr" { type = string }
 variable "user_subnet_cidr" { type = string }
 variable "tags" { type = map(string) }
+variable "key_vault_name" { type = string }
+variable "tenant_id" { type = string }

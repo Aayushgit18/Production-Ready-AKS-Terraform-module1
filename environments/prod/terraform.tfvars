@@ -12,3 +12,5 @@ tags = {
   owner       = "platform"
   costcenter  = "production"
 }
+key_vault_name = "kv-aks-prod"
+tenant_id      = "<YOUR_TENANT_ID>"

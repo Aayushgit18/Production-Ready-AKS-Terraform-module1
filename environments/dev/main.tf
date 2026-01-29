@@ -45,3 +45,12 @@ module "aks" {
   acr_id = module.acr.acr_id
   tags               = var.tags
 }
+
+module "key_vault" {
+  source   = "../../modules/key-vault"
+  name     = var.key_vault_name
+  location = var.location
+  rg_name  = module.rg.name
+  tenant_id = var.tenant_id
+  tags     = var.tags
+}
