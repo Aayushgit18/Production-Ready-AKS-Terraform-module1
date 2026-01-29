@@ -4,28 +4,25 @@
 
 This repository provisions a production-ready Azure Kubernetes Service (AKS) infrastructure using Terraform.
 
+---
+
 ## 2. Key Features
 
-Modular Terraform design
+* Modular Terraform design
+* Remote backend with Azure Blob Storage
+* Separate dev and prod environments
+* Secure networking with Azure CNI
+* Private AKS cluster
+* Azure AD (Entra ID) RBAC
+* ACR integration
+* Monitoring with Log Analytics
+* Workload Identity (OIDC)
 
-Remote backend with Azure Blob Storage
-
-Separate dev and prod environments
-
-Secure networking with Azure CNI
-
-Private AKS cluster
-
-Azure AD (Entra ID) RBAC
-
-ACR integration
-
-Monitoring with Log Analytics
-
-Workload Identity (OIDC)
-
+---
 
 ## 3. Repository Structure
+
+```
 .
 ├── bootstrap/                # ONE-TIME infra (Terraform backend)
 ├── environments/
@@ -39,7 +36,6 @@ Workload Identity (OIDC)
 │   └── resource-group/
 ├── versions.tf               # Provider + Terraform version
 └── README.md
-
 ```
 
 ---
@@ -135,7 +131,6 @@ This creates:
 * Resource Group
 * Storage Account
 * Blob container for Terraform state
-
 
 ---
 
@@ -237,7 +232,6 @@ cd environments/prod
 terraform destroy
 ```
 
-⚠️ Do NOT destroy `bootstrap` unless backend is no longer needed.
+⚠️ **Do NOT destroy `bootstrap` unless backend is no longer needed.**
 
 ---
-
